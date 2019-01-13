@@ -12,8 +12,8 @@ KEY = PATH + file_name
 # Establish the AWS client connection using access keys.
 # Select the correct AWS resource
 s3 = boto3.resource('s3',
-                    aws_access_key_id='AKIAI5HCDUERQ6VUWIFQ',
-                    aws_secret_access_key='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',
+                    aws_access_key_id='**********************',
+                    aws_secret_access_key='***********************',
                     region_name='us-east-1'
                     )
 

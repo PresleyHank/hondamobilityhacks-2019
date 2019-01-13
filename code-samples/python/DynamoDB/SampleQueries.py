@@ -8,8 +8,8 @@ from decimal import Decimal
 # Establish the AWS client connection using access keys.
 # Select the correct AWS resource
 dynamodb_obj = boto3.resource('dynamodb',
-                              aws_access_key_id='AKIAI5HCDUERQ6VUWIFQ',
-                              aws_secret_access_key='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',
+                              aws_access_key_id='****************',
+                              aws_secret_access_key='*****************************',
                               region_name='us-east-1'
                               )
 # Select the correct data table

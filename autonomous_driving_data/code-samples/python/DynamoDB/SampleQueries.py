@@ -8,8 +8,8 @@ from decimal import Decimal
 # Establish the AWS client connection using access keys.
 # Select the correct AWS resource
 dynamodb_obj = boto3.resource('dynamodb',
-                              aws_access_key_id='****************',
-                              aws_secret_access_key='*****************************',
+                              aws_access_key_id='***************************',
+                              aws_secret_access_key='************************************',
                               region_name='us-east-1'
                               )
 # Select the correct data table
@@ -25,22 +25,6 @@ class DecimalEncoder(json.JSONEncoder):
             else:
                 return int(o)
         return super(DecimalEncoder, self).default(o)
-
-
-def read_all():
-    """
-    Function reads out the entire database, and exports to a json file at samples-files/read-all.json.
-    :return: True if file was created. False if file was not created.
-    """
-    response = table.scan()
-
-    # Output Full Table to JSON File
-    with open("sample-files/read-all.json", "w") as data_file:
-        json.dump(response, data_file, cls=DecimalEncoder, indent=4)
-    if Path("sample-files/read-all.json").is_file():
-        return True
-    else:
-        return False
 
 
 def query_all_gps_data(driveid):
@@ -59,16 +43,16 @@ def query_all_gps_data(driveid):
     else:
         cont = False
     while cont:
-        reponse2 = None
-        reponse2 = table.query(
+        response2 = None
+        response2 = table.query(
             KeyConditionExpression=Key('driveid').eq(driveid),
             ExclusiveStartKey=cont_key
         )
-        response['Items'].extend(reponse2['Items'])
-        if 'LastEvaluatedKey' in reponse2:
+        response['Items'].extend(response2['Items'])
+        if 'LastEvaluatedKey' in response2:
             cont = True
             cont_key = None
-            cont_key = reponse2['LastEvaluatedKey']
+            cont_key = response2['LastEvaluatedKey']
         else:
             cont = False
     print_length(response)
@@ -81,29 +65,29 @@ def query_drive_scenario(driveid):
     :param driveid: a single numeric driveid.
     :return: dictionary containing a list of items
     """
-    qdsreponse = table.query(
+    qdsresponse = table.query(
         KeyConditionExpression=Key('driveid').eq(driveid)
     )
-    if 'LastEvaluatedKey' in qdsreponse:
+    if 'LastEvaluatedKey' in qdsresponse:
         qds_cont = True
-        qds_cont_key = qdsreponse['LastEvaluatedKey']
+        qds_cont_key = qdsresponse['LastEvaluatedKey']
     else:
         qds_cont = False
     while qds_cont:
-        qdsreponse2 = None
-        qdsreponse2 = table.query(
+        qdsresponse2 = None
+        qdsresponse2 = table.query(
             KeyConditionExpression=Key('driveid').eq(driveid),
             ExclusiveStartKey=qds_cont_key
         )
-        qdsreponse['Items'].extend(qdsreponse2['Items'])
-        if 'LastEvaluatedKey' in qdsreponse2:
+        qdsresponse['Items'].extend(qdsresponse2['Items'])
+        if 'LastEvaluatedKey' in qdsresponse2:
             qds_cont = True
             qds_cont_key = None
-            qds_cont_key = qdsreponse2['LastEvaluatedKey']
+            qds_cont_key = qdsresponse2['LastEvaluatedKey']
         else:
             qds_cont = False
-    print_length(qdsreponse)
-    return qdsreponse
+    print_length(qdsresponse)
+    return qdsresponse
 
 
 def query_specific_timestamp(driveid, timestamp):
@@ -112,11 +96,11 @@ def query_specific_timestamp(driveid, timestamp):
     :param timestamp: a single numeric logtime
     :return: dictionary containing a list of items with a single item
     """
-    qstreponse = table.query(
+    qstresponse = table.query(
         KeyConditionExpression=Key('driveid').eq(driveid) & Key('logtime').eq(timestamp)
     )
-    print_length(qstreponse)
-    return qstreponse
+    print_length(qstresponse)
+    return qstresponse
 
 
 def print_length(response):

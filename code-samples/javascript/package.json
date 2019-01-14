@@ -1,7 +1,0 @@
-{
-  "name": "aws-dynamodb-examples",
-  "version": "1.0.0",
-  "dependencies": {
-    "aws-sdk": "^2.375.0"
-  }
-}

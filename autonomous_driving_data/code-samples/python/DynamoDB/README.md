@@ -11,12 +11,6 @@ Working with the Boto3 library within Python is very simple to get installed.  A
 and pip, simply execute the command `pip install boto3`.  Pip should take care of the installation process.
 
 ## Working with Boto3
-All examples are split between two files in the same partial class 'Program'.
-- **Program.cs** contains the main method and the DynamoDB client creation 
-method.
-- **SampleQueries.cs** contains methods for various queries and their supporting 
-methods.
-
 **This section is a walkthrough of that code. To view the code directly, simply 
 go to the two files in this folder.**
 
@@ -24,6 +18,7 @@ Here are the imported libraries required for AWS:
 
 ```python
     import boto3
+    from boto3.dynamodb.conditions import Key, Attr
 ```
 
 And required for the example code, but not for AWS:
@@ -32,7 +27,6 @@ And required for the example code, but not for AWS:
     import json
     import decimal
     from pathlib import Path
-    from boto3.dynamodb.conditions import Key, Attr
     from decimal import Decimal
 ```
 
@@ -47,13 +41,13 @@ Declare a DynamoDB client object and the name of the table you want to use:
 
 Before any queries, the DynamoDB client object must be created so that the 
 DynamoDB API can be accessed. We must also pass our access and secret key to the client.  Additionally,
-are able to select the region here.
+we are able to select the region here.
 
 ```python
     client = boto3.client(
         'dynamodb',
-        aws_access_key_id='',
-        aws_secret_access_key='',
+        aws_access_key_id='*************',
+        aws_secret_access_key='***************************',
         region_name='us-east-1'
     )
 ```
@@ -64,17 +58,13 @@ not be hardcoded in your code files.
 interested though, here's more information on it:
 > https://boto3.amazonaws.com/v1/documentation/api/latest/guide/quickstart.html#configuration
 
-### Creating a QueryRequest
+### Creating a Query Request
 
-A `QueryRequest` is the object that represents your query. Each one can be 
+A query request is the object that represents your query. Each one can be 
 customized depending on the information you're trying to fetch from the 
 database.
 
-Some additional import statements are required for the example below:
-```python
-    from boto3.dynamodb.conditions import Key, Attr
-```
-In the examples, each `QueryRequest` is executed as a dot operation on the table object we create.
+In the examples, each query is executed as a dot operation on the table object we create.
 
 ```python
     # Define our table name within DynamodDB
@@ -87,7 +77,7 @@ In the examples, each `QueryRequest` is executed as a dot operation on the table
 ```
 
 Notes on Query Parameters: 
->**ProjectionExpression**: specifies the attributes you want in the scan result.
+>**ProjectionExpression**: specifies the attributes you want in the query result.
 
 >**FilterExpression**: specifies a condition that returns only items that satisfy the condition. 
 >All other items are discarded.
@@ -144,23 +134,10 @@ Finally, to select which columns you want to retrieve for each row, you use a
 
 If no `ProjectionExpression` is given, all columns will be returned.
 
-### Running a QueryRequest
-
-Next we'll need a helper method to handle queries. This method receives a 
-`QueryRequest`, runs it, and returns the compiled results.
-
-```python
-TODO
-```
-
-Note this loop:
-
-```python
-TODO
-```
+### Pagination of Query Results
 
 Queries to DynamoDB are limited to a certain size, measured in bytes. If you 
-pull all the columns from the table, the size limit is hit at about 400 rows. 
+pull all the columns from the table, the size limit is hit at about 337 rows. 
 To work around this, if a query hits the limit before all the results are 
 returned, a `LastEvaluatedKey` attribute will have a value of the key of the 
 row that it stopped on. You can take this key and assign it to the 
@@ -171,8 +148,33 @@ On each 'sub' query, the results are compiled in a 'master' results list and
 then returned once the entire query is finished:
 
 ```python
-TODO
+    qdsresponse = table.query(
+        KeyConditionExpression=Key('driveid').eq(driveid)
+    )
+    if 'LastEvaluatedKey' in qdsresponse:
+        qds_cont = True
+        qds_cont_key = qdsresponse['LastEvaluatedKey']
+    else:
+        qds_cont = False
+    while qds_cont:
+        qdsresponse2 = None
+        qdsresponse2 = table.query(
+            KeyConditionExpression=Key('driveid').eq(driveid),
+            ExclusiveStartKey=qds_cont_key
+        )
+        qdsresponse['Items'].extend(qdsresponse2['Items'])
+        if 'LastEvaluatedKey' in qdsresponse2:
+            qds_cont = True
+            qds_cont_key = None
+            qds_cont_key = qdsresponse2['LastEvaluatedKey']
+        else:
+            qds_cont = False
+    print_length(qdsresponse)
+    return qdsresponse
 ```
+If we were to process this query without looping, we would be given only the initial 1MB response from DynamoDB.
+The easiest way to validate that you have all results is to check for the existance of the 'LastEvaluatedKey' in
+the returned results of the query.
 
 ### Accessing the results
 
@@ -209,29 +211,28 @@ This query demonstrates how to pull all rows for a drive scenario.
 
 ```python
 def query_drive_scenario(driveid):
-    qdsreponse = table.query(
+    qdsresponse = table.query(
         KeyConditionExpression=Key('driveid').eq(driveid)
     )
-    if 'LastEvaluatedKey' in qdsreponse:
+    if 'LastEvaluatedKey' in qdsresponse:
         qds_cont = True
-        qds_cont_key = qdsreponse['LastEvaluatedKey']
+        qds_cont_key = qdsresponse['LastEvaluatedKey']
     else:
         qds_cont = False
     while qds_cont:
-        qdsreponse2 = None
-        qdsreponse2 = table.query(
+        qdsresponse2 = None
+        qdsresponse2 = table.query(
             KeyConditionExpression=Key('driveid').eq(driveid),
             ExclusiveStartKey=qds_cont_key
         )
-        qdsreponse['Items'].extend(qdsreponse2['Items'])
-        if 'LastEvaluatedKey' in qdsreponse2:
+        qdsresponse['Items'].extend(qdsresponse2['Items'])
+        if 'LastEvaluatedKey' in qdsresponse2:
             qds_cont = True
             qds_cont_key = None
-            qds_cont_key = qdsreponse2['LastEvaluatedKey']
+            qds_cont_key = qdsresponse2['LastEvaluatedKey']
         else:
             qds_cont = False
-    print_length(qdsreponse)
-    return qdsreponse
+    return qdsresponse
 ```
 
 ### Retrieve all data at a specific timestamp (`logtime`)
@@ -241,11 +242,11 @@ timestamp. In the event data, this should always return only one row.
 
 ```python
 def query_specific_timestamp(driveid, timestamp):
-    qstreponse = table.query(
+    qstresponse = table.query(
         KeyConditionExpression=Key('driveid').eq(driveid) & Key('logtime').eq(timestamp)
     )
-    print_length(qstreponse)
-    return qstreponse
+    print_length(qstresponse)
+    return qstresponse
 ```
 
 ### Retrieve all GPS data for a drive scenario
@@ -266,16 +267,16 @@ def query_all_gps_data(driveid):
     else:
         cont = False
     while cont:
-        reponse2 = None
-        reponse2 = table.query(
+        response2 = None
+        response2 = table.query(
             KeyConditionExpression=Key('driveid').eq(driveid),
             ExclusiveStartKey=cont_key
         )
-        response['Items'].extend(reponse2['Items'])
-        if 'LastEvaluatedKey' in reponse2:
+        response['Items'].extend(response2['Items'])
+        if 'LastEvaluatedKey' in response2:
             cont = True
             cont_key = None
-            cont_key = reponse2['LastEvaluatedKey']
+            cont_key = response2['LastEvaluatedKey']
         else:
             cont = False
     print_length(response)

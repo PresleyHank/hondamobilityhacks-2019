@@ -14,10 +14,10 @@ namespace HondaHackathonExampleCode
         {
             CreateClient();
 
-            string driveScenarioID = "desired drive id";
+            string driveScenarioID = "20181127151525";
 
             var driveScenarioQueryResults = QueryDriveScenario(driveScenarioID).GetAwaiter().GetResult();
-            var timestampQueryResults = QuerySpecificTimestamp(driveScenarioID, "desired time stamp").GetAwaiter().GetResult();
+            var timestampQueryResults = QuerySpecificTimestamp(driveScenarioID, "1376395").GetAwaiter().GetResult();
             var gpsDataOnlyResults = QueryAllGpsData(driveScenarioID).GetAwaiter().GetResult();
 
             PrintLogTime(driveScenarioQueryResults[0]);
@@ -33,8 +33,8 @@ namespace HondaHackathonExampleCode
         /// </summary>
         private static void CreateClient()
         {
-            string accessKey = "********************";
-            string secretKey = "****************************************";
+            string accessKey = "****************";
+            string secretKey = "********************************";
             var region = Amazon.RegionEndpoint.USEast1;
 
             try

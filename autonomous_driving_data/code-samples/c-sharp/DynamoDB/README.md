@@ -9,6 +9,19 @@ recommended to use asynchronous.
 **The goal of this guide is to provide enough information for you to access the
 data without having to spend time on a deep-dive of the official documentation.**
 
+1. [Requirements](#requirements)
+2. [Working with DynamoDB](#working-with-dynamodb)
+    1. [Creating the DynamoDB client to access the DynamoDB API](#creating-the-dynamodb-client-to-access-the-dynamodb-api)
+    2. [Creating a QueryRequest](#creating-a-queryrequest)
+    3. [Running a QueryRequest](#running-a-queryrequest)
+    4. [Accessing the results](#accessing-the-results)
+3. [Sample Queries](#sample-queries)
+    1. [Retrieve all data from a specific drive scenario](#retrieve-all-data-from-a-specific-drive-scenario)
+    2. [Retrieve all data at a specific timestamp](#retrieve-all-data-at-a-specific-timestamp)
+    3. [Retrieve all GPS data for a drive scenario](#retrieve-all-gps-data-for-a-drive-scenario)
+    4. [GPS printing](#gps-printing)
+4. [Further information](#further-information)
+
 ## Requirements
 
 1. Visual Studio 2017 Community from
@@ -344,10 +357,11 @@ This query demonstrates how to pull all rows for a drive scenario.
     }
 ```
 
-### Retrieve all data at a specific timestamp (`logtime`)
+### Retrieve all data at a specific timestamp
 
 This query demonstrates how to pull all rows for a drive scenario at a specific
-timestamp. In the event data, this should always return only one row.
+timestamp (`logtime` in the database). In the event data, this should always 
+return only one row.
 
 ```csharp
     public static async Task<List<Dictionary<string, AttributeValue>>> QuerySpecificTimestamp(string driveID, string time)

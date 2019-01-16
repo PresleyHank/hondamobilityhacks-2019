@@ -33,3 +33,4 @@ Below is the map of the test area for these 20+ vehicles and intersections.
 
 ![Corridor_heatmap](/connected_vehicle_data/images/Corridor_heatmap.png)
 
+This dataset contains logs of V2V and V2I messages on US 33 Corridor.

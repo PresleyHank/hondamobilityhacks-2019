@@ -1,8 +1,8 @@
-# January 2019 Honda Mobility Hackathon
+# Autonomous Driving Data
 
-Welcome to the Honda Mobility Hackathon. In this repo you'll find event 
-information, data, and code samples for various programming languages on how to 
-access the data and associated files.
+In this repo you'll find event information, data, and code samples for various 
+
+programming languages and how to access the data and associated files.
 
 1. [General Information](#general-information)
 2. [Data and File Access](#data-and-file-access)

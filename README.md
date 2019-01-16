@@ -1,3 +1,7 @@
+---
+typora-root-url: ./
+---
+
 # Honda Mobility Hacks
 
 # Powered by P3 and Continental
@@ -17,7 +21,7 @@ You can also use any publicly available data sets for their hacks.
 
 Sensory data from an autonomous vehicle driven in Detroit and Ann Arbor area. 
 
-![SensorLayout](.\autonomous_driving_data\references\SensorLayout.png)
+![SensorLayout](/autonomous_driving_data/references/SensorLayout.png)
 
 ## Connected Vehicle Data
 

@@ -30,7 +30,7 @@ When making requests to the API:
 
 ## Connection Requirements
 
-Method: GET
+HTTP Method: GET
 
 Request Headers:
 
@@ -42,10 +42,11 @@ Key=
 
 ```python
 # Making a Python request
-
 import requests
+import json
 
-url = "https://ipacdev.hondaresearch.com:8443/hackathon/hondadsrc/evtwarn"
+# Sample query for device 2004 and trip 12 
+url = "https://ipacdev.hondaresearch.com:8443/hackathon/hondadsrc/evtwarn?device=2004&trip=12"
 
 headers = {
     'key' : "************",
@@ -54,7 +55,46 @@ headers = {
 
 response = requests.request("GET", url, headers=headers)
 
-print(response.text)
+json_obj = json.loads(response.text)
+
+print(json.dumps(json_obj, indent=4))
+```
+
+Output:
+
+```python
+{
+    "data": [
+        {
+            "device": 2004,
+            "trip": 12,
+            "time": 48150,
+            ...
+            "hvTurnSignal": 0
+        },
+        {
+            "device": 2004,
+            "trip": 12,
+            "time": 48250,
+			...
+            "hvTurnSignal": 0
+        },
+        {
+            "device": 2004,
+            "trip": 12,
+            "time": 48350,
+            ...
+            "hvTurnSignal": 0
+        },
+        {
+            "device": 2004,
+            "trip": 12,
+            "time": 48450,
+            ...
+            "hvTurnSignal": 0
+        }
+    ]
+}
 ```
 
 

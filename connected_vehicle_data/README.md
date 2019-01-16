@@ -2,6 +2,14 @@
 
 This dataset contains the periodic log of around 24 connected vehicles.  
 
+The logs are collected and processed into the data tables below.
+
+Each vehicle is identified by a `{device}` number. 
+
+Each commute of a vehicle is identified by a `{trip}` number.
+
+The summary of all {device}s and {trip}s is aggregated in the `summary` table.
+
 The dataset is accessible through a networked API. 
 
 __Important Notes__:
@@ -9,7 +17,8 @@ __Important Notes__:
 When making requests to the API:
 
 1. Make sure to include the provided `key` in the header of every request.
-2. Some of the API endpoints give back so much data that you will get a 404 error if you try to reach them without specifying query attributes. Make sure you specify a {device} and/or {trip} and/or {id} to your request.
+2. The output format is based on `json`
+3. Some of the API endpoints give back so much data that you will get a 404 error if you try to reach them without specifying query attributes. Make sure you specify a {device} and/or {trip} to your request.
 
 ## Table of Contents
 1. [Connection Requirements](#connection-requirements)
@@ -68,15 +77,13 @@ print(response.text)
 
 ## Available APIs
 
-Each table is accessible through the following APIs using {device}, {trip}, and {id} numbers. 
+Each table is accessible through the following APIs using {device} and {trip} numbers. 
 
-### Tables:
+### Log URIs:
 
 ---
 
 #### EvtWarn          
-
-https://ipacdev.hondaresearch.com:8443/hackathon/hondadsrc/evtwarn
 
 https://ipacdev.hondaresearch.com:8443/hackathon/hondadsrc/evtwarn?device={device}
 
@@ -85,8 +92,6 @@ https://ipacdev.hondaresearch.com:8443/hackathon/hondadsrc/evtwarn?device={devic
 
 #### Host
 
-https://ipacdev.hondaresearch.com:8443/hackathon/hondadsrc/host
-
 https://ipacdev.hondaresearch.com:8443/hackathon/hondadsrc/host?device={device}
 
 https://ipacdev.hondaresearch.com:8443/hackathon/hondadsrc/host?device={device}&trip={trip}
@@ -94,16 +99,12 @@ https://ipacdev.hondaresearch.com:8443/hackathon/hondadsrc/host?device={device}&
 
 #### RvBsm
 
-https://ipacdev.hondaresearch.com:8443/hackathon/hondadsrc/rvbsm
-
 https://ipacdev.hondaresearch.com:8443/hackathon/hondadsrc/rvbsm?device={device}
 
 https://ipacdev.hondaresearch.com:8443/hackathon/hondadsrc/rvbsm?device={device}&trip={trip}
                          
 
 #### Spat
-
-https://ipacdev.hondaresearch.com:8443/hackathon/hondadsrc/spat
 
 https://ipacdev.hondaresearch.com:8443/hackathon/hondadsrc/spat?device={device}
 
@@ -120,7 +121,7 @@ https://ipacdev.hondaresearch.com:8443/hackathon/hondadsrc/summary?device={devic
 
  
 
-### Enums:
+### Dictionary URIs:
 
 ---
 
@@ -172,6 +173,8 @@ Data dictionaries for each table are provided below.
 
  
 
+---
+
 | EvtWarn Table       | **Type** | Units      | **Description**                                              | **Range**                                |
 | ------------------- | -------- | ---------- | ------------------------------------------------------------ | ---------------------------------------- |
 | Device              | int32    |            | Randomly selected   number between 2000 and 3000             | 2000 to 3000                             |
@@ -212,6 +215,8 @@ Data dictionaries for each table are provided below.
 
  
 
+---
+
 | Host Table                                         | **Type** | Units                  | **Description**                                              | **Range**                                                    |
 | -------------------------------------------------- | -------- | ---------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | Device                                             | int32    |                        | Randomly number   between 2000 and 3000                      | 2000 to 3000                                                 |
@@ -244,6 +249,8 @@ Data dictionaries for each table are provided below.
 
  
 
+---
+
 | RvBsm Table         | **Type** | Units      | **Description**                                              | **Range**                                                    |
 | ------------------- | -------- | ---------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | Device              | int32    |            | between 2000 and   3000                                      | 2000 to 3000                                                 |
@@ -264,6 +271,8 @@ Data dictionaries for each table are provided below.
 | RvLongitudinalAccel | real     | m/s2       |                                                              | -15.0    -  15.0                                             |
 
  
+
+---
 
 | Spat Table         | Type    | Units           | **Description**                                              | **Range**                                                    |
 | ------------------ | ------- | --------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |

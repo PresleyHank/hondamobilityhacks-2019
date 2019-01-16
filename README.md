@@ -1,7 +1,3 @@
----
-typora-root-url: ./
----
-
 # Honda Mobility Hacks
 
 # Powered by P3 and Continental
@@ -13,9 +9,9 @@ This repository holds two datasets that you will be using through the span of th
 -  Autonomous Driving Data
 - Connected Vehicles Data
 
-You are free to choose either or both datasets. 
+You are free to choose either or both datasets but the use of at least one of the above datasets is required. 
 
-You can also use any publicly available data sets for their hacks.
+You can also use any publicly available data sets for your hacks.
 
 ## Autonomous Driving Data
 

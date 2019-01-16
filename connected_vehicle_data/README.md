@@ -83,7 +83,6 @@ https://ipacdev.hondaresearch.com:8443/hackathon/hondadsrc/evtwarn?device={devic
 https://ipacdev.hondaresearch.com:8443/hackathon/hondadsrc/evtwarn?device={device}&trip={trip}
 
 
-
 #### Host
 
 https://ipacdev.hondaresearch.com:8443/hackathon/hondadsrc/host
@@ -91,8 +90,7 @@ https://ipacdev.hondaresearch.com:8443/hackathon/hondadsrc/host
 https://ipacdev.hondaresearch.com:8443/hackathon/hondadsrc/host?device={device}
 
 https://ipacdev.hondaresearch.com:8443/hackathon/hondadsrc/host?device={device}&trip={trip}
-
-​                              
+                     
 
 #### RvBsm
 
@@ -101,8 +99,7 @@ https://ipacdev.hondaresearch.com:8443/hackathon/hondadsrc/rvbsm
 https://ipacdev.hondaresearch.com:8443/hackathon/hondadsrc/rvbsm?device={device}
 
 https://ipacdev.hondaresearch.com:8443/hackathon/hondadsrc/rvbsm?device={device}&trip={trip}
-
-​                              
+                         
 
 #### Spat
 
@@ -111,8 +108,7 @@ https://ipacdev.hondaresearch.com:8443/hackathon/hondadsrc/spat
 https://ipacdev.hondaresearch.com:8443/hackathon/hondadsrc/spat?device={device}
 
 https://ipacdev.hondaresearch.com:8443/hackathon/hondadsrc/spat?device={device}&trip={trip}
-
-​               
+    
 
 #### Summary
 

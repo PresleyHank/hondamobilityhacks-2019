@@ -1,7 +1,6 @@
 # Autonomous Driving Data
 
 In this repo you'll find event information, data, and code samples for various 
-
 programming languages and how to access the data and associated files.
 
 1. [General Information](#general-information)
@@ -9,7 +8,8 @@ programming languages and how to access the data and associated files.
 
 ## General Information
 
-tbd
+The data contained within this category was collected and provided by Continental and P3.  For questions or issues with
+accessing the date, please seek out the support staff from P3.
 
 ## Data and File Access
 
@@ -40,5 +40,3 @@ languages. The languages are C++, C#, Java, JavaScript, and Python. Reference
 the READMEs (there are multiple) for each language.
 
 Descriptions/definitions of the data can be found in [the DataDefinitions.md file](./DataDefinitions.md).
-
-## Title

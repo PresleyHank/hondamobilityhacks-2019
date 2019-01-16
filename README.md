@@ -21,5 +21,15 @@ Sensory data from an autonomous vehicle driven in Detroit and Ann Arbor area.
 
 ## Connected Vehicle Data
 
+Vehicles and traffic signals on the US 33 Corridor in Ohio are equipped with Dedicated Short Range Communication (DSRC) radios to transmit safety messages and deliver Signal Phase And Timing (SPAT) data. 
 
+![Corridor_map](/connected_vehicle_data/images/Corridor_map.png)
+
+The goal is to create an environment where Vehicle-to-Vehicle (V2V) and Vehicle-to-Infrastructure (V2I) technology can be tested.
+
+![honda-smart-intersection](/connected_vehicle_data/images/honda-smart-intersection.jpg)
+
+Below is the map of the test area for these 20+ vehicles and intersections.
+
+![Corridor_heatmap](/connected_vehicle_data/images/Corridor_heatmap.png)
 

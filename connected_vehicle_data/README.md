@@ -1,6 +1,6 @@
 # Connected Vehicles Data
 
-This dataset contains the periodic log of around 24 connected vehicles.  
+This dataset contains the periodic log of 20+ connected vehicles.  
 
 The logs are collected and processed into the data tables below.
 

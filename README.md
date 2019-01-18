@@ -4,6 +4,8 @@
 
 Welcome to the Honda Mobility Hackathon. 
 
+[JOIN THE SLACK!](https://join.slack.com/t/hondamobilityhacks/shared_invite/enQtNTI3ODUxMzc2NDM5LWQxNTNhMzE1MGQ3MzU1N2VlOTQwYjA3OWQ0MDMyYTM3NDQ3MTdkOTQ3ZmJiYzZkYWNkMDA1YmNjNzhjOWQ5MTQ)
+
 This repository holds two datasets that you will be using through the span of the Hackathon:
 
 -  Autonomous Driving Data

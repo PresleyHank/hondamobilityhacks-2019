@@ -11,7 +11,7 @@ access the data and associated files.
 
 The data contained within this category was collected and provided by 
 Continental and P3.  For questions or issues withaccessing the date, please 
-seek out the support staff from P3.
+seek out the support staff from P3 (Seth Jones).
 
 ## Drive Scenarios
 Maps of exact drive routes are available from Seth Jones if desired.
@@ -81,6 +81,9 @@ Type 6: 5 Trips <br>
 | 6        | 12/11/2018 | 9:38 AM    | Parsha, Ryan     | Slightly wet, cloudy, light traffic                                                                                                                                                                                           | 20181211_093807_RecFile_P3_Edge |
 
 ## Data and File Access
+
+**IMPORTANT** The full database is very large. If you would like the entire dataset, please
+reach out to Seth Jones for the offline version.
 
 ### Access
 

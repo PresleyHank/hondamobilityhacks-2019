@@ -34,7 +34,7 @@ HTTP Method: GET
 
 Request Headers:
 
-Key=
+Key = AC85FK223FNP90AK72
 
 ---
 
@@ -49,7 +49,7 @@ import json
 url = "https://ipacdev.hondaresearch.com:8443/hackathon/hondadsrc/evtwarn?device=2004&trip=12"
 
 headers = {
-    'key' : "************",
+    'key' : "AC85FK223FNP90AK72",
     'cache-control' : "no-cache"
 }
 

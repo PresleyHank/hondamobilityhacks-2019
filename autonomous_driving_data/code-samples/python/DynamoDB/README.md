@@ -297,6 +297,14 @@ def print_gps_data(single_log):
     else:
         print("Log does not contain valid GPS data.")
 ```
+### Saving to a file
+
+When saving locally, we need to use the DecimalEncoder by passing it throught 'cls=' parameter.  I would also recommend including 'indent=4' to make the file easily readable.
+
+```python
+with open("sample.json", "w") as data_file:
+    json.dump(response, data_file, cls=DecimalEncoder, indent=4)
+```
 
 ## Further information
 
